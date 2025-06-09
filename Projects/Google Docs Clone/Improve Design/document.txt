@@ -1,0 +1,3 @@
+Hello, world!
+This is a real-world document editor example.
+[Image: picture.jpg]
