@@ -87,10 +87,7 @@ It creates/initializes:
 | **Adapter**                       | `BluetoothSpeakerAdapter`, `WiredSpeakerAdapter`, `HeadphonesAdapter`                                | Converts different third-party audio APIs (e.g., `BluetoothSpeakerAPI`) to a common interface `IAudioOutputDevice`. Ensures uniformity. |
 | **Strategy**                      | `PlayStrategy` (abstract), `SequentialPlayStrategy`, `RandomPlayStrategy`, `CustomPlayStrategy`      | Encapsulates different ways of playing songs. Easy to switch strategies at runtime without modifying client code.                       |
 | **Composition / Aggregation**     | `Playlist` \*-- `Song`, `PlaylistManager` \*-- `Playlist`                                            | Represents **ownership** and **1-to-many** relationships. `Playlist` contains songs; `PlaylistManager` manages many playlists.          |
-| **Dependency Injection (manual)** | Fields like `AudioEngine`, `PlayStrategy`, `IAudioOutputDevice` in `MusicPlayerFacade`               | Loosely couples classes; makes it easy to replace strategies or devices at runtime.                                                     |
-
---- |
-
+| **Dependency Injection (manual)** | Fields like `AudioEngine`, `PlayStrategy`, `IAudioOutputDevice` in `MusicPlayerFacade`               | Loosely couples classes; makes it easy to replace strategies or devices at runtime.                                            
 ---
 
 ## 🔰 UML Diagram
@@ -131,6 +128,4 @@ MusicPlayerFacade (Facade)
 - 📅 Add scheduling feature for auto-play
 - 🔐 Role-based access if turned into a multi-user app
 
-```
 
-```
