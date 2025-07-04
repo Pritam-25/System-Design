@@ -1,3 +1,5 @@
+package SOLID_Design_Principle.Dependency_Inversion_Principle_DIP;
+
 class MySQLDatabase {  // Low-level module
     public void saveToSQL(String data) {
         System.out.println(
