@@ -14,7 +14,7 @@ class Product {
 
 // 1. ShoppingCart: Only responsible for Cart related business logic.
 class ShoppingCart {
-    private final List<Product> products = new ArrayList<>();
+    private  List<Product> products = new ArrayList<>();
 
     void addProduct(Product p) {
         products.add(p);
@@ -52,7 +52,7 @@ class ShoppingCartPrinter {
 
 // 3. ShoppingCartStorage: Only responsible for saving cart to DB
 class ShoppingCartStorage {
-    private ShoppingCart cart;
+    private final ShoppingCart cart;
 
     ShoppingCartStorage(ShoppingCart cart) {
         this.cart = cart;

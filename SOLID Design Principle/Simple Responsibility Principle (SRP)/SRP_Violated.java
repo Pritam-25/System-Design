@@ -1,8 +1,10 @@
+
 import java.util.ArrayList;
 import java.util.List;
 
 // Product class representing any item of any ECommerce
 class Product {
+
     String name;
     double price;
 
@@ -14,6 +16,7 @@ class Product {
 
 // Violating SRP: ShoppingCart handles cart logic, printing, and storage
 class ShoppingCart {
+
     private List<Product> products = new ArrayList<>();
 
     // Adds a product to the cart
@@ -51,6 +54,7 @@ class ShoppingCart {
 }
 
 public class SRP_Violated {
+
     public static void main(String[] args) {
         ShoppingCart cart = new ShoppingCart();
 
@@ -61,4 +65,3 @@ public class SRP_Violated {
         cart.saveToDatabase();     // SRP Violation
     }
 }
-

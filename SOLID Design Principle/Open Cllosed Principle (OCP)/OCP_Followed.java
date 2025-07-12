@@ -44,7 +44,7 @@ class ShoppingCart {
 
 // ShoppingCartPrinter: Only responsible for printing invoices
 class ShoppingCartPrinter {
-    private ShoppingCart cart;
+    private final ShoppingCart cart;
 
     public ShoppingCartPrinter(ShoppingCart cart) {
         this.cart = cart;

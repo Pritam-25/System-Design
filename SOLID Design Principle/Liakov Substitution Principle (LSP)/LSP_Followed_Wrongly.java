@@ -71,7 +71,7 @@ class FixedTerm implements Account {
 }
 
 class BankClient {
-    private List<Account> accounts;
+    private final List<Account> accounts;
 
     public BankClient(List<Account> accounts) {
         this.accounts = accounts;

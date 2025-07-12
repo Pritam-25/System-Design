@@ -1,5 +1,3 @@
-// High level modules should not depend on low level module but rather both should depend on abstraction
-
 // Abstraction (Interface)
 interface Database {
     void save(String data);
@@ -46,9 +44,9 @@ public class DIP_Followed {
         MongoDBDatabase mongodb = new MongoDBDatabase();
 
         UserService service1 = new UserService(mysql);
-        service1.storeUser("Aditya");
+        service1.storeUser("Pritam");
 
         UserService service2 = new UserService(mongodb);
-        service2.storeUser("Rohit");
+        service2.storeUser("Sayan");
     }
 }

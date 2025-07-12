@@ -1,0 +1,26 @@
+👤 User created: Pritam, Location: (22.57, 88.36)
+🏪 Restaurant registered: Tandoori House, Location: (22.58, 88.35)
+🍽️ Menu loaded with 3 dishes
+🛒 Added Butter Chicken to cart
+🛒 Added Garlic Naan to cart
+🧾 Order placed: Order#ORD12345
+💳 Payment method selected: UPI
+✅ Payment successful via UPI for amount ₹520.00
+📦 Order status updated: PENDING → PREPARING
+
+👨‍🍳 FoodManager started preparing food for Order#ORD12345
+🥘 Preparing Butter Chicken...
+🥖 Preparing Garlic Naan...
+✅ Food prepared for Order#ORD12345
+📦 Order status updated: PREPARING → READY_FOR_PICKUP
+
+🚚 DeliveryManager managing delivery for Order#ORD12345
+📍 Created DeliveryMetaData for pickup and drop locations
+📍 Finding nearest rider using HaversineDistanceStrategy...
+👷 Rider assigned: Rider#R123
+📦 Order status updated: READY_FOR_PICKUP → ASSIGNED
+📦 Order status updated: ASSIGNED → PICKED_UP
+📦 Order status updated: PICKED_UP → DELIVERED
+
+🔔 Notification sent to Pritam: "Your order has been delivered. Enjoy your meal!"
+🎉 Order#ORD12345 completed successfully!

@@ -7,7 +7,7 @@ interface Shape {
 
 // Square is a 2D shape but is forced to implement volume()
 class Square implements Shape {
-    private double side;
+    private final double side;
 
     public Square(double s) {
         this.side = s;
@@ -26,7 +26,8 @@ class Square implements Shape {
 
 // Rectangle is also a 2D shape but is forced to implement volume()
 class Rectangle implements Shape {
-    private double length, width;
+    private final double length;
+    private final double width;
 
     public Rectangle(double l, double w) {
         this.length = l;
@@ -46,7 +47,7 @@ class Rectangle implements Shape {
 
 // Cube is a 3D shape, so it actually has a volume
 class Cube implements Shape {
-    private double side;
+    private final double side;
 
     public Cube(double s) {
         this.side = s;

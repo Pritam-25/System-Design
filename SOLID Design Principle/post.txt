@@ -1,0 +1,33 @@
+🎯 Started Learning Low-Level System Design (LLD)
+
+This week, I began my journey into Low-Level System Design by focusing on the core fundamentals that every backend developer should know.
+
+📌 What I learned:
+🔹 OOP Concepts
+
+Abstraction, Encapsulation, Inheritance, Polymorphism
+
+🔹 UML Diagrams
+
+Class Diagram
+
+Sequence Diagram
+
+🔹 SOLID Principles
+
+S - Single Responsibility: A class should do one thing only
+
+O - Open/Closed: Code should be open to extension, but closed to modification
+
+L - Liskov Substitution: Subclasses should work in place of their parent class
+
+I - Interface Segregation: Classes shouldn’t implement methods they don’t need
+
+D - Dependency Inversion: Depend on interfaces, not concrete classes
+
+
+🕵️‍♂️ Resources I'm using:
+📺 Coder Army YouTube Channel
+Taught by Aditya Tandon — clear, project-based explanations that are easy to follow.
+
+Shoutout to Rohit Negi for consistently sharing valuable backend and system design content.

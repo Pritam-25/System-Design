@@ -1,0 +1,50 @@
+zomato-system/
+│
+├── models/
+│   ├── User.java
+│   ├── Cart.java
+│   ├── Restaurant.java
+│   ├── Menu.java
+│   ├── Dish.java
+│   ├── DishAddOn.java
+│   ├── Location.java
+│   └── Order.java
+│
+├── managers/
+│   ├── OrderManager.java
+│   ├── RestaurantManager.java
+│   ├── DeliveryManager.java
+│   ├── RiderAssignmentManager.java
+│   ├── NotificationManager.java
+│   └── FoodManager.java
+│
+├── strategy/
+│   ├── payment/
+│   │   ├── PaymentStrategy.java
+│   │   ├── UPI.java
+│   │   ├── CreditCard.java
+│   │   └── NetBanking.java
+│   │
+│   ├── distance/
+│   │   ├── DistanceStrategy.java
+│   │   └── HaversineDistanceStrategy.java
+│   │
+│   └── notification/
+│       ├── INotificationSender.java
+│       ├── PushNotificationSender.java
+│       └── SMSNotificationSender.java
+│
+├── delivery/
+│   ├── DeliveryMetaData.java
+│   └── Rider.java
+│
+├── enums/
+│   └── OrderStatus.java
+│
+├── utils/
+│   └── IDGenerator.java
+│
+├── main/
+│   └── ZomatoApp.java
+│
+└── README.md

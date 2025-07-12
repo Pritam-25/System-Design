@@ -14,7 +14,7 @@ class Product {
 
 // ShoppingCart class: Only handles cart logic (SRP)
 class ShoppingCart {
-    private List<Product> products = new ArrayList<>();
+    private  List<Product> products = new ArrayList<>();
 
     public void addProduct(Product p) {
         products.add(p);
@@ -35,7 +35,7 @@ class ShoppingCart {
 
 // Responsible for printing the invoice only
 class ShoppingCartPrinter {
-    private ShoppingCart cart;
+    private final ShoppingCart cart;
 
     public ShoppingCartPrinter(ShoppingCart cart) {
         this.cart = cart;
@@ -52,10 +52,9 @@ class ShoppingCartPrinter {
 
 // Responsible for storing cart data (e.g., to DB)
 class ShoppingCartStorage {
-    private ShoppingCart cart;
 
     public ShoppingCartStorage(ShoppingCart cart) {
-        this.cart = cart;
+        // No need to store cart as a field since it's not used
     }
 
     public void saveToDatabase() {
