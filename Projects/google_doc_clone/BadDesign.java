@@ -1,8 +1,10 @@
-import java.util.List;
+
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 class DocumentEditor {
+
     private List<String> documentElements;
     private String renderedDocuments;
 
@@ -37,7 +39,7 @@ class DocumentEditor {
         return renderedDocuments;
     }
 
-    public void saveToFile(){
+    public void saveToFile() {
         try {
             FileWriter writer = new FileWriter("document.txt");
             writer.write(renderDocument());
@@ -49,7 +51,8 @@ class DocumentEditor {
     }
 }
 
-public class DocumentEditorClient {
+public class BadDesign {
+
     public static void main(String[] args) {
         DocumentEditor editor = new DocumentEditor();
         editor.addText("Hello, world!");

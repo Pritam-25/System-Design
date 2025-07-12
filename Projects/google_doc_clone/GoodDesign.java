@@ -3,12 +3,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// Interface for document elements
+// ========== DocumentElement Interface ==========
 interface DocumentElement {
     String render();
 }
 
-// Concrete implementation for text elements
+// ========== Concrete TextElement ==========
 class TextElement implements DocumentElement {
     private String text;
 
@@ -22,7 +22,7 @@ class TextElement implements DocumentElement {
     }
 }
 
-// Concrete implementation for image elements
+// ========== Concrete ImageElement ==========
 class ImageElement implements DocumentElement {
     private String imagePath;
 
@@ -36,7 +36,7 @@ class ImageElement implements DocumentElement {
     }
 }
 
-// Document class responsible for holding a collection of elements
+// ========== Document: Pure Storage ==========
 class Document {
     private List<DocumentElement> documentElements = new ArrayList<>();
 
@@ -44,22 +44,34 @@ class Document {
         documentElements.add(element);
     }
 
-    public String render() {
+    public List<DocumentElement> getElements() {
+        return documentElements;
+    }
+}
+
+// ========== Renderer Interface ==========
+interface DocumentRenderer {
+    String render(List<DocumentElement> elements);
+}
+
+// ========== Plain Text Renderer ==========
+class PlainTextRenderer implements DocumentRenderer {
+    @Override
+    public String render(List<DocumentElement> elements) {
         StringBuilder result = new StringBuilder();
-        for (DocumentElement element : documentElements) {
-            result.append(element.render());
-            result.append("\n");
+        for (DocumentElement element : elements) {
+            result.append(element.render()).append("\n");
         }
         return result.toString();
     }
 }
 
-// Interface for persistence
+// ========== Persistence Interface ==========
 interface Persistence {
     void save(String data);
 }
 
-// Concrete implementation that saves to file
+// ========== File-Based Storage ==========
 class FileStorage implements Persistence {
     @Override
     public void save(String data) {
@@ -74,14 +86,16 @@ class FileStorage implements Persistence {
     }
 }
 
-// Editor class to operate on document and storage
+// ========== Document Editor ==========
 class DocumentEditor {
     private Document document;
     private Persistence storage;
+    private DocumentRenderer renderer;
 
-    public DocumentEditor(Document document, Persistence storage) {
+    public DocumentEditor(Document document, Persistence storage, DocumentRenderer renderer) {
         this.document = document;
         this.storage = storage;
+        this.renderer = renderer;
     }
 
     public void addText(String text) {
@@ -89,11 +103,11 @@ class DocumentEditor {
     }
 
     public void addImage(String imagePath) {
-        document.addElement(new ImageElement(imagePath)); 
+        document.addElement(new ImageElement(imagePath));
     }
 
     public String renderDocument() {
-        return document.render();
+        return renderer.render(document.getElements());
     }
 
     public void saveDocument() {
@@ -101,20 +115,21 @@ class DocumentEditor {
     }
 }
 
-// Main client
-public class DocumentEditorClient {
+// ========== Client ==========
+public class GoodDesign {
     public static void main(String[] args) {
         Document document = new Document();
         Persistence persistence = new FileStorage();
-        DocumentEditor editor = new DocumentEditor(document, persistence);
+        DocumentRenderer renderer = new PlainTextRenderer();
 
-        // Simulate user input
+        DocumentEditor editor = new DocumentEditor(document, persistence, renderer);
+
         editor.addText("Hello, world!");
         editor.addText("This is a real-world document editor example.");
         editor.addImage("picture.jpg");
 
-        // Display and save the final document
         System.out.println(editor.renderDocument());
+
         editor.saveDocument();
     }
 }
