@@ -52,7 +52,7 @@ public class RiderAssignmentManager {
             System.out.println("🚲 Rider " + bestRider.getRiderName() + " assigned to order " + order.getOrderId());
             return bestRider;
         } else {
-            System.out.println("❌ No available riders for order " + order.getOrderId());
+            System.out.println("❌ No available riders for order #" + order.getOrderId());
             return null;
         }
     }

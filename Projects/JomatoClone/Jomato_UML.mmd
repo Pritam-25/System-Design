@@ -1,0 +1,193 @@
+---
+config:
+  layout: elk
+  look: classic
+  theme: forest
+---
+classDiagram
+direction LR
+    class ZomatoApplication {
+	    +main(String[] args)
+    }
+    class ZomatoFacade {
+	    +createUser(name, lat, lon)
+	    +registerRestaurant(name, ownerName, lat, lon)
+	    +addDishToMenu(Restaurant, Dish)
+	    +addToCart(User, Dish, quantity)
+	    +placeOrder(User)
+	    +makePayment(Order, IPaymentStrategy)
+	    +processOrder(Order)
+	    +getInstance()
+    }
+    class User {
+	    -userId
+	    -name
+	    -location
+	    -cart
+	    +getCart()
+    }
+    class Cart {
+	    -restaurant
+	    -items
+	    +addItem(Dish, int)
+	    +getTotalCost()
+	    +isEmpty()
+    }
+    class Restaurant {
+	    -restaurantId
+	    -name
+	    -location
+	    -menu
+	    -owner
+	    -isOpen
+	    +addMenuItem(Dish)
+	    +isOpen()
+    }
+    class Menu {
+	    -restaurantName
+	    -dishes
+	    +addDish(Dish)
+	    +getDishByName(name)
+    }
+    class Dish {
+	    -name
+	    -description
+	    -price
+	    -dishImages
+	    -addOns
+    }
+    class Order {
+	    -orderId
+	    -user
+	    -deliveryLocation
+	    -restaurant
+	    -items
+	    -paymentStrategy
+	    -foodAmount
+	    -orderStatus
+	    -deliveryMetaData
+	    -isPaid
+	    +markPaid()
+	    +isPaid()
+    }
+    class Location {
+	    -latitude
+	    -longitude
+    }
+    class RestaurantOwner {
+	    -name
+	    -rating
+	    +getName()
+	    +getRating()
+	    +setRating(Rating)
+    }
+    class Rider {
+	    -name
+	    -riderId
+	    -location
+	    -isAvailable
+	    -rating
+    }
+    class RestaurantManager {
+	    -restaurants
+	    +createRestaurant(Restaurant)
+	    +getRestaurantByName(name)
+	    +canAcceptOrder(Restaurant)
+	    +getInstance()
+    }
+    class OrderManager {
+	    +createOrder(User)
+	    +processOrder(Order)
+	    +getInstance()
+    }
+    class RiderAssignmentManager {
+	    -riders
+	    -distanceStrategy
+	    +setRiders(List)
+	    +setDistanceStrategy(DistanceStrategy)
+	    +assignRider(Order)
+	    +getInstance()
+    }
+    class DistanceStrategy {
+	    +calculateDistance(Location, Location)
+    }
+    class IPaymentStrategy {
+	    +pay(orderId, amount)
+    }
+    class CreditCardPaymentStrategy {
+	    -cardNumber
+	    +pay(orderId, amount)
+    }
+    class UpiPaymentStrategy {
+	    +pay(orderId, amount)
+    }
+    class NotificationManager {
+	    +notifyUser(name, message, INotificationSender)
+	    +getInstance()
+    }
+    class INotificationSender {
+	    +sendNotification(userName, message)
+    }
+    class SMSNotificationSender {
+	    +sendNotification(userName, message)
+    }
+    class PushNotificationSender {
+	    +sendNotification(userName, message)
+    }
+    class OrderStatus {
+	    PENDING
+	    PROCESSING
+	    ACCEPTED
+	    PREPARING
+	    PREPARED
+	    READY_FOR_PICKUP
+	    ASSIGNED_TO_DELIVERY
+	    PICKED_UP
+	    DELIVERED
+    }
+    class DeliveryMetaData {
+	    -assignedRider
+	    -pickupLocation
+	    -dropLocation
+	    +setAssignedRider(Rider)
+	    +setPickupLocation(Location)
+	    +setDropLocation(Location)
+    }
+
+	<<singleton>> ZomatoFacade
+	<<singleton>> RestaurantManager
+	<<singleton>> OrderManager
+	<<singleton>> RiderAssignmentManager
+	<<singleton>> NotificationManager
+	<<enum>> OrderStatus
+
+    CreditCardPaymentStrategy --|> IPaymentStrategy
+    UpiPaymentStrategy --|> IPaymentStrategy
+    INotificationSender <|-- PushNotificationSender
+    INotificationSender <|-- SMSNotificationSender
+    ZomatoApplication --> ZomatoFacade : uses
+    ZomatoFacade --> User : creates
+    ZomatoFacade --> Restaurant : creates
+    ZomatoFacade --> RestaurantManager : uses
+    ZomatoFacade --> OrderManager : uses
+    ZomatoFacade --> RiderAssignmentManager : uses
+    ZomatoFacade --> NotificationManager : uses
+    ZomatoFacade --> IPaymentStrategy : uses
+    User --> Cart : has
+    User --> Location : has
+    Cart --> Restaurant : has
+    Cart --> Dish : contains
+    Restaurant --> Menu : has
+    Restaurant --> RestaurantOwner : has
+    Menu --> Dish : contains
+    Order --> User : has
+    Order --> Restaurant : has
+    Order --> Location : has
+    Order --> IPaymentStrategy : uses
+    Order --> OrderStatus : has
+    Order --> DeliveryMetaData : has
+    OrderManager --> Order : manages
+    RestaurantManager --> Restaurant : manages
+    RiderAssignmentManager --> Rider : manages
+    RiderAssignmentManager --> DistanceStrategy : uses
+    NotificationManager --> INotificationSender : uses

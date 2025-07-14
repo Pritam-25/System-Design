@@ -2,16 +2,15 @@ package Projects.ZomatoClone;
 
 import Projects.ZomatoClone.managers.*;
 import Projects.ZomatoClone.models.*;
-import Projects.ZomatoClone.service.NotificationManager;
 import Projects.ZomatoClone.strategies.HaversineDistanceStrategy;
 import Projects.ZomatoClone.strategies.IPaymentStrategy;
-import Projects.ZomatoClone.strategies.SMSNotificationSender;
 
 import java.util.List;
 
 public class ZomatoFacade {
+    private static volatile ZomatoFacade instance;
 
-    public ZomatoFacade() {
+    private ZomatoFacade() {
         // Rider setup happens once automatically during app startup
         RiderAssignmentManager riderMgr = RiderAssignmentManager.getInstance();
         List<Rider> riders = List.of(
@@ -20,9 +19,18 @@ public class ZomatoFacade {
         );
         riderMgr.setRiders(riders);
         riderMgr.setDistanceStrategy(new HaversineDistanceStrategy());
-        System.out.println("✅ Riders configured in Facade constructor.");
     }
 
+    public static ZomatoFacade getInstance() {
+        if (instance == null) {
+            synchronized (ZomatoFacade.class) {
+                if (instance == null) {
+                    instance = new ZomatoFacade();
+                }
+            }
+        }
+        return instance;
+    }
 
     // ✅ Create a new user
     public User createUser(String name, double lat, double lon) {

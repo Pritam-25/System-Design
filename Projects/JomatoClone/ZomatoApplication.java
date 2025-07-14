@@ -7,9 +7,10 @@ import Projects.ZomatoClone.strategies.SMSNotificationSender;
 
 public class ZomatoApplication {
     public static void main(String[] args) {
+        System.out.println("🚀 Welcome to Zomato Food Delivery System");
 
         // 🧠 Create Facade
-        ZomatoFacade zomato = new ZomatoFacade();
+        ZomatoFacade zomato = ZomatoFacade.getInstance();
 
         // 👤 Step 1: Create User
         User user = zomato.createUser("Pritam", 22.57, 88.36);

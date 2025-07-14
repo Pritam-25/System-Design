@@ -1,159 +1,201 @@
 ---
 config:
-  theme: forest
   layout: elk
   look: classic
+  theme: forest
 ---
 classDiagram
 direction LR
-    class MusicPlayerApplication {
-	    +vector~Song~ songs
-	    +createSong(string, string, string)
-	    +createPlaylist(string)
-	    +addSong(string, string)
-    }
-    class MusicPlayerFacade {
-	    +AudioEngine engine
-	    +Playlist currPl
-	    +PlayStrategy strategy
-	    +connectDevice(DeviceType dt)
-	    +setStrategy(StrategyType st)
-	    +loadPlaylist(string name)
-	    +playSong(Song song)
-	    +play()
-	    +pause()
-	    +playNext()
-	    +playPrev()
-	    +enqueueNext()
-    }
-    class PlaylistManager {
-	    +map~string, Playlist~ mp
-	    +createPlaylist(string name)
-	    +addSongToPL(string pname, Song song)
-	    +getPlaylist(string name)
-    }
-    class DeviceManager {
-	    +IAudioOutputDevice device
-	    +connect(DeviceType dt)
-	    +getDevice()
-    }
-    class DeviceFactory {
-	    +createDevice(DeviceType dt)
-    }
-    class AudioEngine {
-	    -Song currSong
-	    +play(IAudioOutputDevice d, Song s)
-	    +pause()
-    }
-    class Song {
-	    +string title
-	    +string artist
-	    +string path
-    }
-    class Playlist {
-	    +string name
-	    +vector~Song~ list
-	    +addSong(Song s)
-    }
-    class IAudioOutputDevice {
-	    +playAudio(Song s)
-    }
-    class BluetoothSpeakerAdapter {
-	    -BluetoothSpeakerAPI b
-	    +playAudio(Song s)
-    }
-    class WiredSpeakerAdapter {
-	    -WiredSpeakerAPI w
-	    +playAudio(Song s)
-    }
-    class HeadphonesAdapter {
-	    -HeadphonesAPI h
-	    +playAudio(Song s)
-    }
-    class BluetoothSpeakerAPI {
-	    +playSoundViaBluetooth(string data)
-    }
-    class WiredSpeakerAPI {
-	    +playSoundViaCable(string data)
-    }
-    class HeadphonesAPI {
-	    +playSoundVia(string data)
-    }
-    class StrategyManager {
-	    +SequentialPlayStrategy s
-	    +RandomPlayStrategy r
-	    +CustomPlayStrategy c
-	    +getStrategy(StrategyType st)
-    }
-    class PlayStrategy {
-	    +setPlaylist(Playlist pl)
-	    +hasNext()
-	    +next()
-	    +hasPrevious()
-	    +previous()
-	    +addToNext(Song s)
-    }
-    class SequentialPlayStrategy {
-	    -Playlist pl
-	    -int index
-	    +setPlaylist(Playlist pl)
-    }
-    class RandomPlayStrategy {
-	    -Playlist pl
-	    +setPlaylist(Playlist pl)
-    }
-    class CustomPlayStrategy {
-	    -Playlist pl
-	    +setPlaylist(Playlist pl)
-    }
-    class DeviceType {
-	    +BLUETOOTH
-	    +WIRED
-	    +HEADPHONES
-    }
-    class StrategyType {
-	    +SEQUENTIAL
-	    +RANDOM
-	    +CUSTOM
-    }
-    <<Singleton>> MusicPlayerApplication
-    <<Singleton>> MusicPlayerFacade
-    <<Singleton>> PlaylistManager
-    <<Singleton>> DeviceManager
-    <<abstract>> IAudioOutputDevice
-    <<Singleton>> StrategyManager
-    <<abstract>> PlayStrategy
-    MusicPlayerApplication --> MusicPlayerFacade : uses
-    MusicPlayerApplication --> PlaylistManager : uses
-    MusicPlayerApplication --> DeviceManager : uses
-    MusicPlayerApplication --> StrategyManager : uses
-    MusicPlayerApplication "1" --> "many" Song : owns
-    MusicPlayerFacade --> AudioEngine : uses
-    MusicPlayerFacade --> Playlist : uses
-    MusicPlayerFacade --> PlayStrategy : uses
-    MusicPlayerFacade --> DeviceManager : uses
-    MusicPlayerFacade --> PlaylistManager : uses
-    MusicPlayerFacade --> StrategyManager : uses
-    DeviceManager *-- IAudioOutputDevice : has
-    DeviceManager --> DeviceFactory : uses
-    DeviceManager --> DeviceType : uses
-    DeviceFactory --> BluetoothSpeakerAdapter : creates
-    DeviceFactory --> WiredSpeakerAdapter : creates
-    DeviceFactory --> HeadphonesAdapter : creates
-    BluetoothSpeakerAdapter --> BluetoothSpeakerAPI : uses
-    WiredSpeakerAdapter --> WiredSpeakerAPI : uses
-    HeadphonesAdapter --> HeadphonesAPI : uses
-    AudioEngine --> Song : plays
-    AudioEngine --> IAudioOutputDevice : uses
-    PlaylistManager *-- Playlist : manages
-    Playlist "1" --> "many" Song : contains
-    StrategyManager *-- SequentialPlayStrategy : uses
-    StrategyManager *-- RandomPlayStrategy : uses
-    StrategyManager *-- CustomPlayStrategy : uses
-    StrategyManager --> StrategyType : uses
-    PlayStrategy <|-- SequentialPlayStrategy
-    PlayStrategy <|-- RandomPlayStrategy
-    PlayStrategy <|-- CustomPlayStrategy
-    IAudioOutputDevice <|-- BluetoothSpeakerAdapter
-    IAudioOutputDevice <|-- WiredSpeakerAdapter
-    IAudioOutputDevice <|-- HeadphonesAdapter
+class ZomatoApplication {
+    +main(String[] args)
+}
+class ZomatoFacade {
+    +createUser(name, lat, lon)
+    +registerRestaurant(name, ownerName, lat, lon)
+    +addDishToMenu(Restaurant, Dish)
+    +addToCart(User, Dish, quantity)
+    +placeOrder(User)
+    +makePayment(Order, IPaymentStrategy)
+    +processOrder(Order)
+    +getInstance()
+}
+class User {
+    -userId
+    -name
+    -location
+    -cart
+    +getCart()
+}
+class Cart {
+    -restaurant
+    -items
+    +addItem(Dish, int)
+    +getTotalCost()
+    +isEmpty()
+}
+class Restaurant {
+    -restaurantId
+    -name
+    -location
+    -menu
+    -owner
+    -isOpen
+    +addMenuItem(Dish)
+    +isOpen()
+}
+class Menu {
+    -restaurantName
+    -dishes
+    +addDish(Dish)
+    +getDishByName(name)
+}
+class Dish {
+    -name
+    -description
+    -price
+    -dishImages
+    -addOns
+}
+class Order {
+    -orderId
+    -user
+    -deliveryLocation
+    -restaurant
+    -items
+    -paymentStrategy
+    -foodAmount
+    -orderStatus
+    -deliveryMetaData
+    -isPaid
+    +markPaid()
+    +isPaid()
+}
+class Location {
+    -latitude
+    -longitude
+}
+class RestaurantOwner {
+    -name
+    -rating
+    +getName()
+    +getRating()
+    +setRating(Rating)
+}
+class Rider {
+    -name
+    -riderId
+    -location
+    -isAvailable
+    -rating
+}
+class RestaurantManager {
+    -restaurants
+    +createRestaurant(Restaurant)
+    +getRestaurantByName(name)
+    +canAcceptOrder(Restaurant)
+    +getInstance()
+}
+class OrderManager {
+    +createOrder(User)
+    +processOrder(Order)
+    +getInstance()
+}
+class RiderAssignmentManager {
+    -riders
+    -distanceStrategy
+    +setRiders(List<Rider>)
+    +setDistanceStrategy(DistanceStrategy)
+    +assignRider(Order)
+    +getInstance()
+}
+class DistanceStrategy {
+    +calculateDistance(Location, Location)
+}
+class IPaymentStrategy {
+    +pay(orderId, amount)
+}
+class CreditCardPaymentStrategy {
+    -cardNumber
+    +pay(orderId, amount)
+}
+CreditCardPaymentStrategy --|> IPaymentStrategy
+class UpiPaymentStrategy {
+    +pay(orderId, amount)
+}
+UpiPaymentStrategy --|> IPaymentStrategy
+class NotificationManager {
+    +notifyUser(name, message, INotificationSender)
+    +getInstance()
+}
+class INotificationSender {
+    +sendNotification(userName, message)
+}
+<<interface>> INotificationSender
+class SMSNotificationSender{
+     +sendNotification(userName, message)
+}
+class PushNotificationSender {
+    +sendNotification(userName, message)
+}
+INotificationSender <|-- PushNotificationSender
+INotificationSender <|-- SMSNotificationSender
+class OrderStatus {
+    PENDING
+    PROCESSING
+    ACCEPTED
+    PREPARING
+    PREPARED
+    READY_FOR_PICKUP
+    ASSIGNED_TO_DELIVERY
+    PICKED_UP
+    DELIVERED
+    CANCELLED
+    RETURNED
+    REFUND_PROCESSING
+    REFUNDED
+}
+<<enum>> OrderStatus
+class DeliveryMetaData {
+    -assignedRider
+    -pickupLocation
+    -dropLocation
+    +setAssignedRider(Rider)
+    +getAssignRider()
+    +setPickupLocation(Location)
+    +getPickupLocation()
+    +setDropLocation(Location)
+    +getDropLocation()
+}
+
+ZomatoApplication --> ZomatoFacade : uses
+ZomatoFacade --> User : creates
+ZomatoFacade --> Restaurant : creates
+ZomatoFacade --> RestaurantManager : uses
+ZomatoFacade --> OrderManager : uses
+ZomatoFacade --> RiderAssignmentManager : uses
+ZomatoFacade --> NotificationManager : uses
+ZomatoFacade --> IPaymentStrategy : uses
+User --> Cart : has
+User --> Location : has
+Cart --> Restaurant : has
+Cart --> Dish : contains
+Restaurant --> Menu : has
+Restaurant --> RestaurantOwner : has
+Menu --> Dish : contains
+Order --> User : has
+Order --> Restaurant : has
+Order --> Location : has
+Order --> IPaymentStrategy : uses
+Order --> OrderStatus : has
+Order --> DeliveryMetaData : has
+OrderManager --> Order : manages
+RestaurantManager --> Restaurant : manages
+RiderAssignmentManager --> Rider : manages
+RiderAssignmentManager --> DistanceStrategy : uses
+NotificationManager --> INotificationSender : uses
+<<Singleton>> ZomatoFacade
+<<Singleton>> RestaurantManager
+<<Singleton>> OrderManager
+<<Singleton>> RiderAssignmentManager
+<<Singleton>> NotificationManager
+<<abstract>> IPaymentStrategy

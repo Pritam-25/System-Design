@@ -48,6 +48,7 @@ public class DeliveryManager {
             Thread.sleep(2000);
 
             orderMgr.updateOrderStatus(order, OrderStatus.PICKED_UP);
+            NotificationManager.getInstance().notifyUser(order.getUser().getName(), "Your order has been picked up by the rider.", new SMSNotificationSender());
             Thread.sleep(3000);
 
             orderMgr.onOrderDelivered(order);

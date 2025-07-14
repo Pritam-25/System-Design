@@ -64,7 +64,7 @@ public class OrderManager {
 
     // ✅ Called by DeliveryManager when order is delivered
     public void onOrderDelivered(Order order) {
-        updateOrderStatus(order, OrderStatus.DELIVERED);
+        updateOrderStatus(order, OrderStatus.DELIVERED);;
         sendNotification(order, "🎊 Your order has been delivered. Enjoy your meal!");
     }
 
