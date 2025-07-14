@@ -1,26 +1,42 @@
+🚀 Welcome to Zomato Food Delivery System
+-------------------------------------------
 👤 User created: Pritam, Location: (22.57, 88.36)
 🏪 Restaurant registered: Tandoori House, Location: (22.58, 88.35)
-🍽️ Menu loaded with 3 dishes
-🛒 Added Butter Chicken to cart
-🛒 Added Garlic Naan to cart
-🧾 Order placed: Order#ORD12345
-💳 Payment method selected: UPI
-✅ Payment successful via UPI for amount ₹520.00
-📦 Order status updated: PENDING → PREPARING
-
-👨‍🍳 FoodManager started preparing food for Order#ORD12345
-🥘 Preparing Butter Chicken...
-🥖 Preparing Garlic Naan...
-✅ Food prepared for Order#ORD12345
+🍽️ Dish added to Tandoori House menu: Butter Chicken
+🍽️ Dish added to Tandoori House menu: Garlic Naan
+🍽️ Dish added to Tandoori House menu: Paneer Tikka
+🛒 Added 1 x Butter Chicken to cart
+🛒 Added 2 x Garlic Naan to cart
+🔍 RestaurantManager checking if restaurant Tandoori House can accept the order...
+🏪 Restaurant Tandoori House is open and can accept the order.
+🧾 Order placed: Order #611450
+💳 Payment method selected: Credit Card (****3456)
+✅ Payment successful via Credit Card for amount ₹582.80 for order ID: #611450
+📦 Order status updated: PENDING → ACCEPTED
+👨‍🍳 FoodManager started preparing food for Order#611450
+📦 Order status updated: ACCEPTED → PREPARING
+🥘 Preparing 1 x Butter Chicken...
+🥘 Preparing 2 x Garlic Naan...
+✅ Food prepared for Order #611450
 📦 Order status updated: PREPARING → READY_FOR_PICKUP
-
-🚚 DeliveryManager managing delivery for Order#ORD12345
+🚚 DeliveryManager managing delivery for Order#611450
 📍 Created DeliveryMetaData for pickup and drop locations
 📍 Finding nearest rider using HaversineDistanceStrategy...
-👷 Rider assigned: Rider#R123
-📦 Order status updated: READY_FOR_PICKUP → ASSIGNED
-📦 Order status updated: ASSIGNED → PICKED_UP
+👷 Rider assigned: Rider #R123
+📦 Order status updated: READY_FOR_PICKUP → ASSIGNED_TO_DELIVERY
+📦 Order status updated: ASSIGNED_TO_DELIVERY → PICKED_UP
 📦 Order status updated: PICKED_UP → DELIVERED
-
-🔔 Notification sent to Pritam: "Your order has been delivered. Enjoy your meal!"
-🎉 Order#ORD12345 completed successfully!
+📩 SMS to Pritam: "Your order has been delivered. Enjoy your meal!"
+🎉 Order #611450 completed successfully!
+--------------------------------
+--------------------------------
+🧾 Order Summary (Invoice):
+Items:
+ - Butter Chicken (x1): ₹300.00
+ - Garlic Naan (x2): ₹160.00
+--------------------------------
+Subtotal: ₹460.00
+GST (18%): ₹82.80
+Delivery Charge: ₹40.00
+Total Payable: ₹582.80
+--------------------------------

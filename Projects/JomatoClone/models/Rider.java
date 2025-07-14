@@ -1,21 +1,29 @@
-package Projects.JomatoClone.models;
+package Projects.ZomatoClone.models;
+
+import Projects.ZomatoClone.utils.IdGeneration;
 
 public class Rider {
-    private final String riderId;
+    private String name;
+    private final int riderId;
     private Location location;
     private boolean isAvailable;
     private double rating;
 
 
-    public Rider(String riderId, Location location, double rating) {
-        this.riderId = riderId;
+    public Rider(String name, Location location) {
+        this.name = name;
+        this.riderId = IdGeneration.generateUserId();
         this.location = location;
-        this.isAvailable = true;
-        this.rating = rating;
+        this.isAvailable = true; // assuming rider is available by default
+        this.rating = 0.0; // default rating
     }
 
-    public String getRiderId() {
-        return riderId;
+    public int getRiderId() {
+        return this.riderId;
+    }
+
+    public String getRiderName() {
+        return this.name;
     }
 
     public Location getCurentLocation() {

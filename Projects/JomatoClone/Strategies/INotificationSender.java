@@ -1,4 +1,5 @@
-package Projects.JomatoClone.strategies;
+package Projects.ZomatoClone.strategies;
 
-public class INotificationSender {
+public interface INotificationSender {
+    void sendNotification(String userName, String message);
 }

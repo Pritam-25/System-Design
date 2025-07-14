@@ -1,58 +1,52 @@
-package Projects.JomatoClone.models;
+package Projects.ZomatoClone.models;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
     private String restaurantName;
-    private List<Dish> menuItems;
+    private List<Dish> dishes;
 
-    // No-arg constructor for frameworks or default usage
-    public Menu() {
-        this.menuItems = new ArrayList<>();
-    }
-
-    // Constructor with null check for menuItems
-    public Menu(String restaurantName, List<Dish> menuItems) {
+    // Constructor to initialize the menu with a restaurant name
+    public Menu(String restaurantName) {
         this.restaurantName = restaurantName;
-        this.menuItems = (menuItems != null) ? menuItems : new ArrayList<>();
+        this.dishes = new ArrayList<>();
     }
 
-    public String getRestaurantName() {
-        return restaurantName;
+    public List<Dish> getDishes() {
+        return dishes;
     }
 
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
-    }
-
-    public List<Dish> getMenuItems() {
-        return menuItems;
-    }
-
-    public void setMenuItems(List<Dish> menuItems) {
-        this.menuItems = (menuItems != null) ? menuItems : new ArrayList<>();
+    public void setDishes(List<Dish> menuItems) {
+        this.dishes = (menuItems != null) ? menuItems : new ArrayList<>();
     }
 
     // Add a new dish to the menu
-    public void addMenuItem(Dish dish) {
+    public void addDish(Dish dish) {
         if (dish != null) {
-            this.menuItems.add(dish);
+            this.dishes.add(dish);
         }
     }
 
     // Remove dish from menu
-    public boolean removeMenuItem(Dish dish) {
-        return this.menuItems.remove(dish);
+    public void removeDish(Dish dish) {
+        this.dishes.remove(dish);
     }
 
     // Find dish by name (case-insensitive)
     public Dish getDishByName(String name) {
-        for (Dish dish : menuItems) {
+        for (Dish dish : dishes) {
             if (dish.getName().equalsIgnoreCase(name)) {
                 return dish;
             }
         }
         return null;
+    }
+
+    public void printMenu() {
+        System.out.println("📜 Menu for " + (restaurantName != null ? restaurantName : "Restaurant") + ":");
+        for (Dish dish : dishes) {
+            System.out.println(" - " + dish.getName() + " ₹" + dish.getPrice());
+        }
     }
 }

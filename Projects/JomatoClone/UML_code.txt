@@ -68,7 +68,7 @@ class Order {
     Restaurant restaurant
     List~Dish~ items
     Location deliveryLocation
-    PaymentStrategy paymentStrategy
+    PaymentStrategy IPaymentStrategy
     OrderStatus status
     +setStatus(OrderStatus)
     +getStatus() : OrderStatus

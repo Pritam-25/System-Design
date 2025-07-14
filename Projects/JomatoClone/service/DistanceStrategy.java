@@ -1,6 +1,6 @@
-package Projects.JomatoClone.strategies;
+package Projects.ZomatoClone.service;
 
-import Projects.JomatoClone.models.Location;
+import Projects.ZomatoClone.models.Location;
 
 public interface DistanceStrategy {
     double calculateDistance(Location start, Location end);

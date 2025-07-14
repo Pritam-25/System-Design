@@ -1,5 +1,5 @@
-package Projects.JomatoClone.strategies;
+package Projects.ZomatoClone.strategies;
 
-public interface PaymentStrategy {
+public interface IPaymentStrategy {
     void pay(int orderId,double amount);
 }

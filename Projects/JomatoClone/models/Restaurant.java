@@ -1,19 +1,34 @@
-package Projects.JomatoClone.models;
+package Projects.ZomatoClone.models;
 
-import java.util.ArrayList;
+import Projects.ZomatoClone.utils.IdGeneration;
+
 import java.util.List;
+import java.util.Map;
+
 
 public class Restaurant {
-    private static int nextRestaurantId = 0;
-    private int restaurantId;
+    private final int restaurantId;
     private String name;
-    private String location;
-    private List<MenuItem> menu = new ArrayList<>();
+    private Location location;
+    private final Menu menu;
+    private RestaurantOwner owner;
+    private  boolean isOpen;
 
-    public Restaurant(String name, String location) {
+    public Restaurant(String name, RestaurantOwner owner, Location location) {
         this.name = name;
+        this.owner = owner;
         this.location = location;
-        this.restaurantId = ++nextRestaurantId;
+        this.menu = new Menu(name);
+        this.restaurantId = IdGeneration.generateRestaurantId();
+        this.isOpen = true;  // assuming restaurant is open by default
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
     public String getName() {
@@ -21,22 +36,40 @@ public class Restaurant {
     }
 
     public void setName(String n) {
-        name = n;
+        this.name = n;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(String loc) {
-        location = loc;
+    public void setLocation(Location loc) {
+        this.location = loc;
     }
 
-    public void addMenuItem(MenuItem item) {
-        menu.add(item);
+    public void addMenuItem(Dish item) {
+        menu.addDish(item);
     }
 
-    public List<MenuItem> getMenuItem() {
-        return menu;
+    public List<Dish> getMenuItem() {
+        return menu.getDishes();
+    }
+
+
+    // preparing food
+    public boolean foodPrepareComplete(Order order, Map<Dish, Integer> dishes) {
+        for (Map.Entry<Dish, Integer> entry : dishes.entrySet()) {
+            Dish dish = entry.getKey();
+            int quantity = entry.getValue();
+
+            System.out.println("🥘 Preparing " + quantity + " x " + dish.getName() + "...");
+
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                System.out.println("⚠️ Error while preparing food: " + e.getMessage());
+            }
+        }
+        return  true;
     }
 }

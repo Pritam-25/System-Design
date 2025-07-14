@@ -25,7 +25,7 @@ public class DoubleCheckedSingletonComparison {
     }
 
     // -----------------------------
-    // ✅ Version 2: Optimized with local variable (Your Version)
+    // ✅ Version 2: Optimized with local variable 
     // -----------------------------
     static class OptimizedSingleton {
 

@@ -1,4 +1,4 @@
-package Projects.JomatoClone.models;
+package Projects.ZomatoClone.models;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +10,8 @@ public class Dish {
     private List<String> dishImages;
     private List<DishAddOn> addOns;
 
-    public Dish(String name, String description, double price) {
+    public Dish(String name, double price) {
         this.name = name;
-        this.description = description;
         this.price = price;
         this.dishImages = new ArrayList<>();
         this.addOns = new ArrayList<>();

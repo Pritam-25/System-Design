@@ -1,4 +1,10 @@
-package Projects.JomatoClone.enums;
+package Projects.ZomatoClone.enums;
 
-public class Rating {
+public enum Rating {
+    UNASSIGNED,
+    ONE_STAR,
+    TWO_STARS,
+    THREE_STARS,
+    FOUR_STARS,
+    FIVE_STARS,
 }

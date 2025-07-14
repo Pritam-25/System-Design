@@ -1,4 +1,4 @@
-package Projects.JomatoClone.utils;
+package Projects.ZomatoClone.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,4 +1,4 @@
-package Projects.JomatoClone.models;
+package Projects.ZomatoClone.models;
 
 public class Location {
     private double latitude;

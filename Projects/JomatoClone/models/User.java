@@ -1,16 +1,22 @@
-package Projects.JomatoClone.models;
+package Projects.ZomatoClone.models;
+
+import Projects.ZomatoClone.utils.IdGeneration;
 
 public class User {
-    private int UserId;
+    private final int userId;
     private String name;
-    private String address;
-    private Cart cart;
+    private Location location;
+    private final Cart cart;
 
-    public User(int UserId, String name, String address) {
-        this.UserId = UserId;
+    public User(String name, Location location) {
+        this.userId = IdGeneration.generateUserId(); // Assuming it returns a String like "ORD12345"
         this.name = name;
-        this.address = address;
+        this.location = location;
         this.cart = new Cart();
+    }
+
+    public int getUserId() {
+        return userId;
     }
 
     public String getName() {
@@ -18,15 +24,15 @@ public class User {
     }
 
     public void setName(String n) {
-        name = n;
+        this.name = n;
     }
 
-    public String getAddress() {
-        return address;
+    public Location getLocation() {
+        return location;
     }
 
-    public void setAddress(String a) {
-        address = a;
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public Cart getCart() {

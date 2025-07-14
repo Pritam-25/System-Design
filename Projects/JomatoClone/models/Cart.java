@@ -1,50 +1,59 @@
-package Projects.JomatoClone.models;
+package Projects.ZomatoClone.models;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Cart {
     private Restaurant restaurant;
-    private List<Dish> menu = new ArrayList<>();
+    private Map<Dish, Integer> items;
 
     public Cart() {
-        restaurant = null;
-    }
-
-    public void addItem(MenuItem item) {
-        if (restaurant == null) {
-            System.out.println("Cart: Set a restaurant before adding items.");
-            return;
-        }
-        menu.add(item);
-    }
-
-    public double getTotalCost() {
-        double sum = 0;
-        for (MenuItem it : menu) {
-            sum += it.getPrice();
-        }
-        return sum;
-    }
-
-    public boolean isEmpty() {
-        return restaurant == null || menu.isEmpty();
-    }
-
-    public void clear() {
-        menu.clear();
-        restaurant = null;
+        this.restaurant = null;
+        this.items = new HashMap<>();
     }
 
     public void setRestaurant(Restaurant r) {
-        restaurant = r;
+        this.restaurant = r;
     }
 
     public Restaurant getRestaurant() {
         return restaurant;
     }
 
-    public List<MenuItem> gItems() {
-        return menu;
+    public void addItem(Dish dish, int quantity) {
+        if (restaurant == null) {
+            System.out.println("🛑 Set a restaurant before adding items to the cart.");
+            return;
+        }
+        if (quantity <= 0) {
+            System.out.println("⚠️ Quantity must be at least 1.");
+            return;
+        }
+
+        items.put(dish, items.getOrDefault(dish, 0) + quantity);
+    }
+
+    public Map<Dish, Integer> getItems() {
+        return items;
+    }
+
+    public double getTotalCost() {
+        double total = 0;
+        for (Map.Entry<Dish, Integer> entry : items.entrySet()) {
+            Dish dish = entry.getKey();
+            int quantity = entry.getValue();
+            total += dish.getPrice() * quantity;
+        }
+        return total;
+    }
+
+    public boolean isEmpty() {
+        return restaurant == null || items.isEmpty();
+    }
+
+    public void clear() {
+        items.clear();
+        restaurant = null;
+        System.out.println("🧹 Cart cleared");
     }
 }

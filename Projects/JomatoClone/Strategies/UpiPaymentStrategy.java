@@ -1,15 +1,9 @@
-package Projects.JomatoClone.Strategies;
+package Projects.ZomatoClone.strategies;
 
-public class UpiPaymentStrategy implements PaymentStrategy {
-    private final String mobile;
-
-    public UpiPaymentStrategy(String mob) {
-        this.mobile = mob;
-    }
-
+public class UpiPaymentStrategy implements IPaymentStrategy {
     @Override
-    public void pay(double amount) {
-        System.out.println("Paid $" + amount + " using UPI (" + mobile + ")");
+    public void pay(int orderId, double amount) {
+        System.out.println("💳 Payment method selected: UPI");
+        System.out.printf("✅ Payment successful via UPI for amount ₹%.2f for order ID: #%d%n", amount, orderId);
     }
-
 }
