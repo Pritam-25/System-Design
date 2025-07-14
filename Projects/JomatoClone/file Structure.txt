@@ -1,14 +1,8 @@
-zomato-system/
+JomatoClone/
 │
-├── models/
-│   ├── User.java
-│   ├── Cart.java
-│   ├── Restaurant.java
-│   ├── Menu.java
-│   ├── Dish.java
-│   ├── DishAddOn.java
-│   ├── Location.java
-│   └── Order.java
+├── enums/
+│   ├── OrderStatus.java
+│   └── Rating.java
 │
 ├── managers/
 │   ├── OrderManager.java
@@ -18,33 +12,41 @@ zomato-system/
 │   ├── NotificationManager.java
 │   └── FoodManager.java
 │
-├── strategy/
-│   ├── payment/
-│   │   ├── PaymentStrategy.java
-│   │   ├── UPI.java
-│   │   ├── CreditCard.java
-│   │   └── NetBanking.java
-│   │
-│   ├── distance/
-│   │   ├── DistanceStrategy.java
-│   │   └── HaversineDistanceStrategy.java
-│   │
-│   └── notification/
-│       ├── INotificationSender.java
-│       ├── PushNotificationSender.java
-│       └── SMSNotificationSender.java
-│
-├── delivery/
+├── models/
+│   ├── User.java
+│   ├── Cart.java
+│   ├── Restaurant.java
+│   ├── Menu.java
+│   ├── Dish.java
+│   ├── DishAddOn.java
+│   ├── Location.java
+│   ├── Order.java
 │   ├── DeliveryMetaData.java
-│   └── Rider.java
+│   ├── RestaurantOwner.java
+│   ├── Rider.java
 │
-├── enums/
-│   └── OrderStatus.java
+├── service/
+│   ├── NotificationManager.java
+│   └── DistanceStrategy.java
+│
+├── strategies/
+│   ├── CreditCardPaymentStrategy.java
+│   ├── HaversineDistanceStrategy.java
+│   ├── INotificationSender.java
+│   ├── IPaymentStrategy.java
+│   ├── PushNotificationSender.java
+│   ├── SMSNotificationSender.java
+│   ├── UpiPaymentStrategy.java
 │
 ├── utils/
-│   └── IDGenerator.java
+│   ├── IdGeneration.java
+│   └── TimeUtils.java
 │
-├── main/
-│   └── ZomatoApp.java
-│
-└── README.md
+├── ZomatoApplication.java
+├── ZomatoFacade.java
+├── README.md
+├── output.txt
+├── ZomatoClone.iml
+├── ZomatoUML.png
+├── file Structure.txt
+└── UML_code.txt
