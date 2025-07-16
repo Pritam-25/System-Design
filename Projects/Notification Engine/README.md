@@ -38,10 +38,10 @@ So, instead of just writing `sendEmail("Hi")`, we built a **production-grade not
 
 We start with the heart of the system: `INotification`.
 
-```cpp
-class INotification {
-    virtual string getContent() = 0;
-};
+```java
+interface INotification {
+    String getMessage();
+}
 ```
 
 This is an **interface** for anything that can represent a notification. Think of it as a "blueprint" for notification messages.
@@ -52,11 +52,19 @@ This is an **interface** for anything that can represent a notification. Think o
 
 Now we need a simple message type.
 
-```cpp
-class SimpleNotification : public INotification {
-    string text;
-    string getContent() override { return text; }
-};
+```java
+class SimpleNotification implements INotification {
+    private String message;
+
+    public SimpleNotification(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
+}
 ```
 
 This gives us our raw message like `"Welcome to the app!"`.
@@ -72,29 +80,50 @@ We want to **dynamically add info** to a message like:
 
 To avoid creating dozens of subclasses (e.g., `TimestampAndSignatureNotification`), we use the **Decorator Pattern**.
 
-```cpp
-class INotificationDecorator : public INotification {
-protected:
-    INotification* notif;
-};
+```java
+abstract class INotificationDecorator implements INotification {
+    protected INotification notification;
 
-class TimestampDecorator : public INotificationDecorator {
-    string getContent() override {
-        return "[Time] " + notif->getContent();
+    public INotificationDecorator(INotification notification) {
+        this.notification = notification;
     }
-};
+}
 
-class SignatureDecorator : public INotificationDecorator {
-    string getContent() override {
-        return notif->getContent() + " - Team App";
+class TimestampDecorator extends INotificationDecorator {
+    public TimestampDecorator(INotification notification) {
+        super(notification);
     }
-};
+
+    @Override
+    public String getMessage() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedDateTime = now.format(formatter);
+        return "[" + formattedDateTime + "] " + notification.getMessage();
+    }
+}
+
+class SignatureDecorator extends INotificationDecorator {
+    private String signature;
+
+    public SignatureDecorator(INotification notification, String signature) {
+        super(notification);
+        this.signature = signature;
+    }
+
+    @Override
+    public String getMessage() {
+        return notification.getMessage() + " - " + signature;
+    }
+}
 ```
 
 Now we can chain:
 
-```cpp
-notif = new SignatureDecorator(new TimestampDecorator(new SimpleNotification("Hi")));
+```java
+INotification notification = new SimpleNotification("Hi");
+notification = new TimestampDecorator(notification);
+notification = new SignatureDecorator(notification, "Team App");
 ```
 
 ---
@@ -103,29 +132,29 @@ notif = new SignatureDecorator(new TimestampDecorator(new SimpleNotification("Hi
 
 When a new notification is created, multiple components should react (like loggers or delivery systems). We use **Observer Pattern**.
 
-```cpp
-class IObservable {
-    vector<IObserver*> observers;
-    void add(IObserver* o);
-    void remove(IObserver* o);
-    void notify();  // calls update on all observers
-};
+```java
+interface IObservable {
+    void addObserver(IObserver observer);
+    void removeObserver(IObserver observer);
+    void notifyObservers();  // calls update on all observers
+}
 
-class IObserver {
-    virtual void update() = 0;
-};
+interface IObserver {
+    void update();
+}
 ```
 
 ---
 
 ### ✅ Step 5: Observable Wrapper - `NotificationObservable`
 
-```cpp
-class NotificationObservable : public IObservable {
-    INotification* notif;
-    void setNotification(INotification* n);
-    string getNotification();
-};
+```java
+class NotificationObservable implements IObservable {
+    private INotification currentNotification;
+
+    public void setNotification(INotification notification);
+    public String getNotificationMessage();
+}
 ```
 
 This acts as the **shared subject** that observers listen to.
@@ -134,13 +163,15 @@ This acts as the **shared subject** that observers listen to.
 
 ### ✅ Step 6: Logger Observer - `Logger`
 
-```cpp
-class Logger : public IObserver {
-    NotificationObservable* no;
-    void update() override {
-        cout << "LOG: " << no->getNotification();
+```java
+class Logger implements IObserver {
+    private NotificationObservable observable;
+
+    @Override
+    public void update() {
+        System.out.println("Logger: New notification received - " + observable.getNotificationMessage());
     }
-};
+}
 ```
 
 This will print every notification received — for debugging or logging purposes.
@@ -151,14 +182,19 @@ This will print every notification received — for debugging or logging purpose
 
 We now want **multiple ways to send** a notification: SMS, Email, Popup.
 
-```cpp
-class INotificationStrategy {
-    virtual void sendNotification(string content) = 0;
-};
+```java
+interface INotificationStrategy {
+    void sendNotification(String content);
+}
 
-class EmailStrategy : public INotificationStrategy {
-    void sendNotification(string content) { sendEmail(content); }
-};
+class EmailStrategy implements INotificationStrategy {
+    private String emailAddress;
+
+    @Override
+    public void sendNotification(String content) {
+        System.out.println("Sending Email Notification: " + content);
+    }
+}
 ```
 
 You can now extend this system without changing a single existing class!
@@ -169,18 +205,19 @@ You can now extend this system without changing a single existing class!
 
 This is the **main controller**.
 
-```cpp
-class NotificationEngine : public IObserver {
-    NotificationObservable* no;
-    vector<INotificationStrategy*> strategies;
+```java
+class NotificationEngine implements IObserver {
+    private NotificationObservable observable;
+    private List<INotificationStrategy> strategies = new ArrayList<>();
 
-    void update() override {
-        string content = no->getNotification();
-        for (auto s : strategies) {
-            s->sendNotification(content);
+    @Override
+    public void update() {
+        String notificationMessage = observable.getNotificationMessage();
+        for (INotificationStrategy strategy : strategies) {
+            strategy.sendNotification(notificationMessage);
         }
     }
-};
+}
 ```
 
 It listens for updates, grabs the content, and pushes it to all delivery strategies.
@@ -191,16 +228,24 @@ It listens for updates, grabs the content, and pushes it to all delivery strateg
 
 We want a **global access point** that maintains all notifications sent so far.
 
-```cpp
+```java
 class NotificationService {
-    static NotificationService* instance;
-    vector<INotification*> notifications;
+    private static NotificationService instance;
+    private NotificationObservable observable;
+    private List<INotification> notifications = new ArrayList<>();
 
-    void sendNotification() {
-        // store notification
-        // pass to observable
+    public static NotificationService getInstance() {
+        if (instance == null) {
+            instance = new NotificationService();
+        }
+        return instance;
     }
-};
+
+    public void sendNotification(INotification notification) {
+        observable.setNotification(notification);
+        notifications.add(notification);
+    }
+}
 ```
 
 This avoids unnecessary duplication and gives centralized access.
@@ -211,12 +256,12 @@ This avoids unnecessary duplication and gives centralized access.
 
 1. **Client builds a notification**:
 
-   ```cpp
-   INotification* notif = new SignatureDecorator(
-                            new TimestampDecorator(
-                            new SimpleNotification("Welcome")));
+   ```java
+   INotification notif = new SignatureDecorator(
+                         new TimestampDecorator(
+                         new SimpleNotification("Welcome")), "Customer Care");
 
-   NotificationService::getInstance()->sendNotification(notif);
+   NotificationService.getInstance().sendNotification(notif);
    ```
 
 2. `NotificationService::sendNotification()` sets this `notif` in `NotificationObservable`.
@@ -288,82 +333,86 @@ And the best part? It's easily extensible, readable, and modular.
 classDiagram
 direction LR
     class INotification {
-	    +getContent() : string
+	    +getMessage() : String
     }
     class INotificationDecorator {
-	    +INotification* notif
-	    +getContent() : string
+	    +INotification notification
+	    +getMessage() : String
     }
     class IObservable {
-	    +vector~IObserver*~ observers
-	    +add(IObserver* o)
-	    +remove(IObserver* o)
-	    +notify()
+	    +addObserver(IObserver observer)
+	    +removeObserver(IObserver observer)
+	    +notifyObservers()
     }
     class IObserver {
 	    +update()
     }
     class INotificationStrategy {
-	    +sendNotification(string content)
+	    +sendNotification(String content)
     }
     class SimpleNotification {
-	    +string text
-	    +getContent() : string
+	    +String message
+	    +getMessage() : String
     }
     class TimestampDecorator {
-	    +INotification* notif
-	    +getContent() : string
+	    +INotification notification
+	    +getMessage() : String
     }
     class SignatureDecorator {
-	    +INotification* notif
-	    +getContent() : string
+	    +INotification notification
+	    +String signature
+	    +getMessage() : String
     }
     class NotificationObservable {
-	    +INotification* notif
-	    +add(IObserver* o)
-	    +remove(IObserver* o)
-	    +notify()
-	    +setNotification(INotification* n)
-	    +getNotification() : string
+	    +INotification currentNotification
+	    +List~IObserver~ observers
+	    +addObserver(IObserver observer)
+	    +removeObserver(IObserver observer)
+	    +notifyObservers()
+	    +setNotification(INotification notification)
+	    +getNotificationMessage() : String
     }
     class NotificationEngine {
-	    +NotificationObservable* no
-	    +vector~INotificationStrategy*~ ns
+	    +NotificationObservable observable
+	    +List~INotificationStrategy~ strategies
 	    +update()
     }
     class Logger {
-	    +NotificationObservable* no
+	    +NotificationObservable observable
 	    +update()
     }
     class NotificationService {
-	    +vector~INotification*~ notifications
-	    +sendNotification()
+	    +static NotificationService instance
+	    +List~INotification~ notifications
+	    +sendNotification(INotification notification)
     }
     class EmailStrategy {
-	    +sendNotification(string content)
+	    +String emailAddress
+	    +sendNotification(String content)
     }
     class SMSStrategy {
-	    +sendNotification(string content)
+	    +String phoneNumber
+	    +sendNotification(String content)
     }
-    class PopUpStrategy {
-	    +sendNotification(string content)
+    class PopupStrategy {
+	    +sendNotification(String content)
     }
-	<<abstract>> INotification
+	<<interface>> INotification
 	<<abstract>> INotificationDecorator
-	<<abstract>> IObservable
-	<<abstract>> IObserver
-	<<abstract>> INotificationStrategy
+	<<interface>> IObservable
+	<<interface>> IObserver
+	<<interface>> INotificationStrategy
 	<<Singleton>> NotificationService
-    INotification <|-- SimpleNotification
-    INotification <|-- INotificationDecorator
+    INotification <|.. SimpleNotification
+    INotification <|.. INotificationDecorator
     INotificationDecorator <|-- TimestampDecorator
     INotificationDecorator <|-- SignatureDecorator
-    IObservable <|-- NotificationObservable
-    IObserver <|-- Logger
-    IObserver <|-- NotificationEngine
-    INotificationStrategy <|-- EmailStrategy
-    INotificationStrategy <|-- SMSStrategy
-    INotificationStrategy <|-- PopUpStrategy
+    IObservable <|.. NotificationObservable
+    IObserver <|.. Logger
+    IObserver <|.. NotificationEngine
+    INotificationStrategy <|.. EmailStrategy
+    INotificationStrategy <|.. SMSStrategy
+    INotificationStrategy <|.. PopupStrategy
     NotificationEngine --> NotificationObservable
     NotificationEngine --> INotificationStrategy
     Logger --> NotificationObservable
@@ -376,16 +425,16 @@ direction LR
 
 ## 📱 Usage
 
-```cpp
+```java
 // Create a basic notification
-auto notification = new SimpleNotification("Welcome to our service!");
+INotification notification = new SimpleNotification("Welcome to our service!");
 
 // Add decorators
 notification = new TimestampDecorator(notification);
-notification = new SignatureDecorator(notification);
+notification = new SignatureDecorator(notification, "Customer Care");
 
 // Send through the notification service
-NotificationService::getInstance()->sendNotification(notification);
+NotificationService.getInstance().sendNotification(notification);
 ```
 
 ---
