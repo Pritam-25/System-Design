@@ -1,6 +1,4 @@
-# 📘 Observer Design Pattern - Ultimate Revision Guide
-
-> Everything you need to understand and master the **Observer Design Pattern** — explained step-by-step with code, diagrams, real-world analogies, and usage in projects like your notification system.
+# 📘 Observer Design Pattern 
 
 ## 📋 Table of Contents
 
@@ -101,10 +99,11 @@ classDiagram
     ObserverDesignPattern --> Channel : creates
     ObserverDesignPattern --> Subscriber : creates
 
-    note for ISubscriber "Observer interface\nDefines update method\nfor notification handling"
-    note for IChannel "Subject interface\nDefines methods to manage\nsubscribers and notifications"
-    note for Channel "Concrete Subject\nImplements IChannel\nManages subscribers\nand video content"
-    note for Subscriber "Concrete Observer\nImplements ISubscriber\nReacts to channel updates"
+    note for ISubscriber "Observer interface: Defines update method for notification handling"
+    note for IChannel "Subject interface: Manages subscribers and notifications"
+    note for Channel "Concrete Subject: Implements IChannel and stores videos"
+    note for Subscriber "Concrete Observer: implement ISubscriber for channel updates"
+
 ```
 
 ---
