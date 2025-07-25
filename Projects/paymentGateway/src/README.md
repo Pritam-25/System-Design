@@ -33,7 +33,7 @@ Allow a user to initiate a payment via a selected gateway (Paytm or Razorpay) wh
 
 The Payment Gateway System is built with a clear separation of concerns and follows SOLID principles:
 
-![UML Class Diagram](../UML.png)
+![UML Class Diagram](../uml.png)
 
 *UML Class Diagram of the Payment Gateway System*
 
