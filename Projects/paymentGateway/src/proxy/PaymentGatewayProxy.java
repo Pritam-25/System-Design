@@ -1,5 +1,6 @@
-package gateway;
+package proxy;
 
+import gateway.PaymentGateway;
 import model.PaymentRequest;
 
 public class PaymentGatewayProxy extends PaymentGateway {
@@ -30,17 +31,17 @@ public class PaymentGatewayProxy extends PaymentGateway {
     }
 
     @Override
-    protected boolean validatePayment(PaymentRequest request) {
+    public boolean validatePayment(PaymentRequest request) {
         return realGateway.validatePayment(request);
     }
 
     @Override
-    protected boolean initiatePayment(PaymentRequest request) {
+    public boolean initiatePayment(PaymentRequest request) {
         return realGateway.initiatePayment(request);
     }
 
     @Override
-    protected boolean confirmPayment(PaymentRequest request) {
+    public boolean confirmPayment(PaymentRequest request) {
         return realGateway.confirmPayment(request);
     }
 }

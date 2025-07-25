@@ -1,4 +1,5 @@
 package bank;
 
-public class BankingSystem {
+public interface BankingSystem {
+    boolean processPayment(double amount);
 }

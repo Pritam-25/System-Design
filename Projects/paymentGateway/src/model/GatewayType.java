@@ -1,4 +1,6 @@
 package model;
 
-public class GatewayType {
+public enum GatewayType {
+    PAYTM,
+    RAZORPAY
 }
