@@ -56,7 +56,6 @@ class EmailService {
 ```mermaid
 ---
 config:
-  theme: default
   look: classic
   fontFamily: '''Merriweather Variable'', serif'
   themeVariables:
@@ -179,7 +178,6 @@ EmailService service = new EmailService(client);
 ```mermaid
 ---
 config:
-  theme: default
   look: classic
   fontFamily: '''Merriweather Variable'', serif'
   themeVariables:
