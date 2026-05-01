@@ -7,10 +7,7 @@ interface Database {
 class MySQLDatabase implements Database {
     @Override
     public void save(String data) {
-        System.out.println(
-            "Executing SQL Query: INSERT INTO users VALUES('" 
-            + data + "');"
-        );
+        System.out.println("Executing SQL Query: INSERT INTO users VALUES('" + data + "');");
     }
 }
 
@@ -18,10 +15,7 @@ class MySQLDatabase implements Database {
 class MongoDBDatabase implements Database {
     @Override
     public void save(String data) {
-        System.out.println(
-            "Executing MongoDB Function: db.users.insert({name: '" 
-            + data + "'})"
-        );
+        System.out.println("Executing MongoDB Function: db.users.insert({name: '" + data + "'})");
     }
 }
 

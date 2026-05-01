@@ -1,23 +1,20 @@
-class MySQLDatabase {  // Low-level module
+// Low-level module
+class MySQLDatabase {
     public void saveToSQL(String data) {
-        System.out.println(
-            "Executing SQL Query: INSERT INTO users VALUES('" 
-            + data + "');"
-        );
+        System.out.println("Executing SQL Query: INSERT INTO users VALUES('" + data + "');");
     }
 }
 
-class MongoDBDatabase {  // Low-level module
+// Low-level module
+class MongoDBDatabase {
     public void saveToMongo(String data) {
-        System.out.println(
-            "Executing MongoDB Function: db.users.insert({name: '" 
-            + data + "'})"
-        );
+        System.out.println("Executing MongoDB Function: db.users.insert({name: '" + data + "'})");
     }
 }
 
-class UserService {  // High-level module (Tightly coupled)
-    private final MySQLDatabase sqlDb = new MySQLDatabase();      
+// High-level module (Tightly coupled)
+class UserService {
+    private final MySQLDatabase sqlDb = new MySQLDatabase();
     private final MongoDBDatabase mongoDb = new MongoDBDatabase();
 
     public void storeUserToSQL(String user) {
