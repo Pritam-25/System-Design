@@ -10,7 +10,7 @@
 - [⚙️ When to Use](#️-when-to-use)
 - [✅ Advantages](#-advantages)
 - [🚫 Disadvantages](#-disadvantages)
-- [📈 UML Class Diagram (Mermaid)](#-uml-class-diagram-mermaid)
+- [📈 UML Class Diagra](#-uml-class-diagram-mermaid)
 - [🧾 Summary for Interviews](#-summary-for-interviews)
 - [🏁 Conclusion](#-conclusion)
 
@@ -130,7 +130,7 @@ public class ChainOfResponsibilityPattern {
 
 ```mermaid
 classDiagram
-  direction LR
+  direction TB
 
   class Client {
   }

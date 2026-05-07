@@ -14,7 +14,7 @@ class Product {
 
 // ShoppingCart class: Only handles cart logic (SRP)
 class ShoppingCart {
-    private  List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     public void addProduct(Product p) {
         products.add(p);
@@ -64,7 +64,7 @@ class ShoppingCartStorage {
 }
 
 // Main class to run the program
-public class SRP_Followed {
+class SRP_Followed {
     public static void main(String[] args) {
         ShoppingCart cart = new ShoppingCart();
 
@@ -81,4 +81,3 @@ public class SRP_Followed {
         db.saveToDatabase();
     }
 }
-

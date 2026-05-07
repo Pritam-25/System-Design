@@ -86,7 +86,7 @@ class FilePersistence implements Persistence {
     }
 }
 
-public class OCP_Followed {
+class OCP_Followed {
     public static void main(String[] args) {
         ShoppingCart cart = new ShoppingCart();
         cart.addProduct(new Product("Laptop", 50000));

@@ -14,7 +14,7 @@ class Product {
 
 // 1. ShoppingCart: Only responsible for Cart related business logic.
 class ShoppingCart {
-    private  List<Product> products = new ArrayList<>();
+    private List<Product> products = new ArrayList<>();
 
     void addProduct(Product p) {
         products.add(p);
@@ -71,7 +71,7 @@ class ShoppingCartStorage {
     }
 }
 
-public class OCP_Violated {
+class OCP_Violated {
     public static void main(String[] args) {
         ShoppingCart cart = new ShoppingCart();
 
