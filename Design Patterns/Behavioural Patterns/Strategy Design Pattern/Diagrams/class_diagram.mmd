@@ -1,0 +1,29 @@
+classDiagram
+
+    class PaymentService {
+        - PaymentStrategy strategy
+        + processPayment(amount)
+    }
+
+    class PaymentStrategy {
+        <<interface>>
+        + pay(amount)
+    }
+
+    class CreditCardPayment {
+        + pay(amount)
+    }
+
+    class UpiPayment {
+        + pay(amount)
+    }
+
+    class PaypalPayment {
+        + pay(amount)
+    }
+
+    PaymentService --> PaymentStrategy : uses
+
+    CreditCardPayment ..|> PaymentStrategy : implements
+    UpiPayment ..|> PaymentStrategy : implements
+    PaypalPayment ..|> PaymentStrategy : implements

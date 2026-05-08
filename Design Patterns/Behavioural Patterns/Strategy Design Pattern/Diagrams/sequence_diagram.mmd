@@ -1,0 +1,28 @@
+sequenceDiagram
+
+    actor User
+
+    participant Client
+    participant PaymentService
+    participant CreditCardPayment
+    participant UpiPayment
+
+    User ->> Client: Select Credit Card
+
+    Client ->> PaymentService: new PaymentService(strategyA)
+
+    Client ->> PaymentService: processPayment(1000)
+
+    PaymentService ->> CreditCardPayment: pay(1000)
+
+    CreditCardPayment -->> PaymentService: success
+
+    Note over User: User switches to UPI
+
+    Client ->> PaymentService: setStrategy(strategyB)
+
+    Client ->> PaymentService: processPayment(1000)
+
+    PaymentService ->> UpiPayment: pay(1000)
+
+    UpiPayment -->> PaymentService: success
