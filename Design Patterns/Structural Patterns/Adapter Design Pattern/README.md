@@ -1,7 +1,6 @@
 # 🔌 Adapter Design Pattern (Java)
 
 [![Java](https://img.shields.io/badge/Java-8+-orange.svg)](https://www.oracle.com/java/)
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Design Pattern](https://img.shields.io/badge/Pattern-Adapter-green.svg)](https://en.wikipedia.org/wiki/Adapter_pattern)
 
 The **Adapter Design Pattern** is a structural design pattern that allows objects with incompatible interfaces to work together by acting as a bridge (adapter) between them.

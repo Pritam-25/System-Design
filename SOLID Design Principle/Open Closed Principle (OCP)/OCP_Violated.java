@@ -47,6 +47,7 @@ class ShoppingCartPrinter {
             System.out.println(p.name + " - Rs " + p.price);
         }
         System.out.println("Total: Rs " + cart.calculateTotal());
+        System.out.println("-----------------------------------");
     }
 }
 
@@ -59,15 +60,24 @@ class ShoppingCartStorage {
     }
 
     void saveToSQLDatabase() {
-        System.out.println("Saving shopping cart to SQL DB...");
+        System.out.println("\nSaving shopping cart to SQL DB...");
+        for (Product p : cart.getProducts()) {
+            System.out.println("  - " + p.name + ": Rs " + p.price);
+        }
     }
 
     void saveToMongoDatabase() {
-        System.out.println("Saving shopping cart to Mongo DB...");
+        System.out.println("\nSaving shopping cart to Mongo DB...");
+        for (Product p : cart.getProducts()) {
+            System.out.println("  - " + p.name + ": Rs " + p.price);
+        }
     }
 
     void saveToFile() {
-        System.out.println("Saving shopping cart to File...");
+        System.out.println("\nSaving shopping cart to File...");
+        for (Product p : cart.getProducts()) {
+            System.out.println("  - " + p.name + ": Rs " + p.price);
+        }
     }
 }
 

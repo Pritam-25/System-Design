@@ -54,3 +54,6 @@ bin/
 # Windows
 Thumbs.db
 desktop.ini
+
+**/_*.java
+_*/

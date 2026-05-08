@@ -39,7 +39,7 @@ class FixedTerm implements DepositAccount {
 }
 
 class LSP_Correct {
-    public static void main(String[] args) {
+    static void main() {
 
         DepositAccount fixed = new FixedTerm();
         fixed.deposit(1000); // ✅ works

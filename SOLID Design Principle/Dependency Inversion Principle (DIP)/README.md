@@ -217,7 +217,7 @@ After:
 
 This decouples business logic from implementation details.
 
-## 🧠 Key Insight
+# 🧠 Key Insight
 
 > Depend on **what the system needs**, not **how it is implemented**
 

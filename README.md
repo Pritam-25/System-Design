@@ -1,336 +1,229 @@
-# 🌀 UML Relationships
+# 🌀 Low Level Design
 
-In UML Class Diagrams, **relationships = how classes talk to each other**
+[UML Class Diagram Basics](UML_DIAGRAM.md)
 
-There are mainly **6 types**:
+## 📌 Table Of Contents
 
-| Type                         | Meaning                  | Strength |
-| ---------------------------- | ------------------------ | -------- |
-| Association                  | General connection       | ⭐        |
-| Aggregation                  | Weak "has-a"             | ⭐⭐       |
-| Composition                  | Strong "has-a"           | ⭐⭐⭐      |
-| Dependency                   | Uses temporarily         | ⭐        |
-| Inheritance (Generalization) | "is-a"                   | ⭐⭐⭐      |
-| Realization                  | Interface implementation | ⭐⭐⭐      |
+<details>
+<summary><strong>1. SOLID Principles</strong></summary>
 
-👉 UML defines relationships like association, dependency, generalization, realization etc. ([jsware.io][1])
+<br>
 
-## 🎯 2. ASSOCIATION (Most Common)
+1. [Single Responsibility Principle (SRP)](<./SOLID%20Design%20Principle/Single%20Responsibility%20Principle%20(SRP)/README.md>)
 
-### 🔗 Meaning
+2. [Open Closed Principle (OCP)](<./SOLID%20Design%20Principle/Open%20Closed%20Principle%20(OCP)/README.md>)
 
-Basic relationship → **one class knows another**
+3. [Liskov Substitution Principle (LSP)](<./SOLID%20Design%20Principle/Liskov%20Substitution%20Principle%20(LSP)/README.md>)
 
-👉 Objects are independent
-👉 No ownership
+4. [Interface Segregation Principle (ISP)](<./SOLID%20Design%20Principle/Interface%20Segregation%20Principle%20(ISP)/README.md>)
 
-## 🧠 When to Use
+5. [Dependency Inversion Principle (DIP)](<./SOLID%20Design%20Principle/Dependency%20Inversion%20Principle%20(DIP)/README.md>)
 
-* One class **has reference of another**
-* Normal field / property
+</details>
 
-## 📊 Mermaid Diagram
+<details>
+<summary><strong>2. Design Patterns</strong></summary>
 
-```mermaid
-classDiagram
-    class Student {
-        name
-    }
+<br>
 
-    class Teacher {
-        name
-    }
+<details>
+<summary><strong>2.1 Creational Patterns</strong></summary>
 
-    Student --> Teacher
-```
+<br>
 
-## 💻 Code Example
+1. [Singleton Design Pattern](./Design%20Patterns/Creational%20Patterns/Singleton%20Design%20Pattern/README.md)
 
-```java
-class Teacher {}
+2. [Factory Design Pattern](./Design%20Patterns/Creational%20Patterns/Factory%20Design%20Pattern/README.md)
 
-class Student {
-    Teacher teacher; // association
-}
-```
+3. [Abstract Factory Pattern](./Design%20Patterns/Creational%20Patterns/Abstract%20Factory%20Pattern/README.md)
 
-### 🧠 Interview Line
+4. [Builder Design Pattern](./Design%20Patterns/Creational%20Patterns/Builder%20Design%20Pattern/README.md)
 
-> “Association represents a general connection where objects can exist independently.”
+5. [Prototype Design Pattern](./Design%20Patterns/Creational%20Patterns/Prototype%20Design%20Pattern/README.md)
 
-## 🎯 3. AGGREGATION (Weak Has-A)
+</details>
 
-### 🔗 Meaning
+<details>
+<summary><strong>2.2 Structural Patterns</strong></summary>
 
-👉 Whole–part relationship
-👉 BUT part can exist without whole
+<br>
 
-Example:
+1. [Adapter Design Pattern](./Design%20Patterns/Structural%20Patterns/Adapter%20Design%20Pattern/README.md)
 
-* Department → Employees
+2. [Decorator Design Pattern](./Design%20Patterns/Structural%20Patterns/Decorator%20Design%20Pattern/README.md)
 
-## 📊 Mermaid
+3. [Facade Design Pattern](./Design%20Patterns/Structural%20Patterns/Facade%20Design%20Pattern/README.md)
 
-```mermaid
-classDiagram
-    class Department
-    class Employee
+4. [Proxy Design Pattern](./Design%20Patterns/Structural%20Patterns/Proxy%20Design%20Pattern/README.md)
 
-    Department o-- Employee
-```
+5. [Composite Design Pattern](./Design%20Patterns/Structural%20Patterns/Composite%20Design%20Pattern/README.md)
 
-👉 `o--` = hollow diamond (aggregation)
+6. [Bridge Design Pattern](./Design%20Patterns/Structural%20Patterns/Bridge%20Design%20Pattern/README.md)
 
-## 💻 Code
+7. [Flyweight Design Pattern](./Design%20Patterns/Structural%20Patterns/Flyweight%20Design%20Pattern/README.md)
 
-```java
-class Employee {}
+</details>
 
-class Department {
-    List<Employee> employees; // aggregation
-}
-```
+<details>
+<summary><strong>2.3 Behavioral Patterns</strong></summary>
 
-## 🧠 Key Idea
+<br>
 
-* Employee exists even if department is deleted
+1. [Strategy Design Pattern](./Design%20Patterns/Behavioral%20Patterns/Strategy%20Design%20Pattern/README.md)
 
-## 🎯 4. COMPOSITION (Strong Has-A)
+2. [Observer Design Pattern](./Design%20Patterns/Behavioral%20Patterns/Observer%20Design%20Pattern/README.md)
 
-### 🔥 Meaning
+3. [Command Design Pattern](./Design%20Patterns/Behavioral%20Patterns/Command%20Design%20Pattern/README.md)
 
-👉 Strong ownership
-👉 Child **cannot exist without parent**
+4. [State Design Pattern](./Design%20Patterns/Behavioral%20Patterns/State%20Design%20Pattern/README.md)
 
-Example:
+5. [Chain of Responsibility Pattern](./Design%20Patterns/Behavioral%20Patterns/Chain%20of%20Responsibility%20Pattern/README.md)
 
-* House → Room
+6. [Template Method Pattern](./Design%20Patterns/Behavioral%20Patterns/Template%20Method%20Pattern/README.md)
 
-## 📊 Mermaid
+7. [Mediator Design Pattern](./Design%20Patterns/Behavioral%20Patterns/Mediator%20Design%20Pattern/README.md)
 
-```mermaid
-classDiagram
-    class House
-    class Room
+8. [Visitor Design Pattern](./Design%20Patterns/Behavioral%20Patterns/Visitor%20Design%20Pattern/README.md)
 
-    House *-- Room
-```
+9. [Iterator Design Pattern](./Design%20Patterns/Behavioral%20Patterns/Iterator%20Design%20Pattern/README.md)
 
-👉 `*--` = filled diamond (composition)
+</details>
 
-## 💻 Code
+</details>
 
-```java
-class Room {}
+<details>
+<summary><strong>3. Real LLD Problems</strong></summary>
 
-class House {
-    List<Room> rooms = new ArrayList<>();
-}
-```
+<br>
 
-## 🧠 Key Idea
+1. [Parking Lot System Design](./Real%20LLD%20Problems/Parking%20Lot%20System%20Design/README.md)
 
-* If House is destroyed → Rooms destroyed
+2. [BookMyShow LLD](./Real%20LLD%20Problems/BookMyShow%20LLD/README.md)
 
-👉 Strong lifecycle dependency ([go-minder.com][2])
+3. [Elevator System Design](./Real%20LLD%20Problems/Elevator%20System%20Design/README.md)
 
-## ⚡ 5. DEPENDENCY (Uses)
+4. [ATM Machine Design](./Real%20LLD%20Problems/ATM%20Machine%20Design/README.md)
 
-### 🔗 Meaning
+5. [Hotel Management System](./Real%20LLD%20Problems/Hotel%20Management%20System/README.md)
 
-👉 Temporary usage (method level)
+6. [Food Delivery System Design](./Real%20LLD%20Problems/Food%20Delivery%20System%20Design/README.md)
 
-* No field
-* Just uses it
+7. [Cab Booking System Design](./Real%20LLD%20Problems/Cab%20Booking%20System%20Design/README.md)
 
-## 📊 Mermaid
+8. [Splitwise LLD](./Real%20LLD%20Problems/Splitwise%20LLD/README.md)
 
-```mermaid
-classDiagram
-    class OrderService
-    class PaymentService
+9. [Chess Game Design](./Real%20LLD%20Problems/Chess%20Game%20Design/README.md)
 
-    OrderService ..> PaymentService
-```
+10. [Snake and Ladder Design](./Real%20LLD%20Problems/Snake%20and%20Ladder%20Design/README.md)
 
-👉 `..>` = dependency (dashed arrow)
+11. [Tic Tac Toe Design](./Real%20LLD%20Problems/Tic%20Tac%20Toe%20Design/README.md)
 
-## 💻 Code
+12. [Logger Rate Limiter Design](./Real%20LLD%20Problems/Logger%20Rate%20Limiter%20Design/README.md)
 
-```java
-class PaymentService {}
+13. [Notification System Design](./Real%20LLD%20Problems/Notification%20System%20Design/README.md)
 
-class OrderService {
-    void placeOrder(PaymentService payment) { // dependency
-        payment.pay();
-    }
-}
-```
+14. [Cache System Design](./Real%20LLD%20Problems/Cache%20System%20Design/README.md)
 
-## 🧠 When to Use
+15. [File System Design](./Real%20LLD%20Problems/File%20System%20Design/README.md)
 
-* Method parameter
-* Local variable
-* Utility usage
+16. [API Rate Limiter Design](./Real%20LLD%20Problems/API%20Rate%20Limiter%20Design/README.md)
 
-👉 Weakest relationship ([UMLBoard's Website][3])
+17. [Vending Machine Design](./Real%20LLD%20Problems/Vending%20Machine%20Design/README.md)
 
-## 🧬 6. INHERITANCE (Generalization)
+18. [Cricbuzz System Design](./Real%20LLD%20Problems/Cricbuzz%20System%20Design/README.md)
 
-## 🔗 Meaning
+</details>
 
-👉 "IS-A" relationship
+## 🎯 Suggested Study Order
 
-Example:
+### Phase 1 — Core Fundamentals
 
-* Dog is an Animal
+- SOLID Principles
+- Dependency Injection
+- Inversion of Control
+- UML Basics
 
-## 📊 Mermaid
+### Phase 2 — Creational Patterns
 
-```mermaid
-classDiagram
-    class Animal
-    class Dog
+- Singleton
+- Factory
+- Abstract Factory
+- Builder
+- Prototype
 
-    Animal <|-- Dog
-```
+### Phase 3 — Structural Patterns
 
-👉 `<|--` = inheritance
+- Adapter
+- Decorator
+- Facade
+- Proxy
+- Composite
+- Bridge
+- Flyweight
 
-## 💻 Code
+### Phase 4 — Behavioral Patterns
 
-```java
-class Animal {}
+- Strategy
+- Observer
+- Command
+- State
+- Chain of Responsibility
+- Template Method
+- Mediator
+- Visitor
+- Iterator
 
-class Dog extends Animal {}
-```
+### Phase 5 — Real LLD Problems
 
-## 🧠 When to Use
+- Parking Lot
+- BookMyShow
+- Elevator
+- ATM
+- Splitwise
+- Cab Booking
+- Food Delivery
+- Chess
+- Notification System
 
-* True subtype relationship
-* Polymorphism needed
+## 🚀 Interview Preparation Strategy
 
-## 🔌 7. REALIZATION (Interface)
+### Step 1
 
-### 🔗 Meaning
+Learn:
 
-👉 Class implements interface
+- SOLID
+- OOP
+- UML
 
-## 📊 Mermaid
+### Step 2
 
-```mermaid
-classDiagram
-    class PaymentMethod {
-        <<interface>>
-    }
+Master:
 
-    class CreditCard
+- Strategy
+- Factory
+- Observer
+- Decorator
 
-    PaymentMethod <|.. CreditCard
-```
+These appear everywhere in LLD interviews.
 
-👉 `<|..` = realization (dashed inheritance)
+### Step 3
 
-## 💻 Code
+Solve 10–15 real systems:
 
-```java
-interface PaymentMethod {
-    void pay();
-}
+- Parking Lot
+- ATM
+- Splitwise
+- BookMyShow
 
-class CreditCard implements PaymentMethod {
-    public void pay() {}
-}
-```
+### Step 4
 
-### 🧠 When to Use
+For every problem:
 
-* Abstraction (DIP)
-* Interface-based design
+- Draw UML
+- Explain responsibilities
+- Identify SOLID principles
+- Explain extensibility
+- Discuss tradeoffs
 
-## 🧠 8. MOST IMPORTANT (Interview Cheat Sheet)
-
-## 🔥 Difference Table
-
-| Relation    | Arrow | Lifetime    | Example         |                |
-| ----------- | ----- | ----------- | --------------- | -------------- |
-| Association | `--`  | Independent | Student–Teacher |                |
-| Aggregation | `o--` | Independent | Dept–Employee   |                |
-| Composition | `*--` | Dependent   | House–Room      |                |
-| Dependency  | `..>` | Temporary   | Service calls   |                |
-| Inheritance | `<    | --`         | Strong          | Dog–Animal     |
-| Realization | `<    | ..`         | Strong          | Impl interface |
-
-## 🧠 9. HOW TO CHOOSE (Golden Rule)
-
-### Ask these:
-
-### ❓1. Is it "IS-A"?
-
-→ Use **Inheritance**
-
-### ❓2. Is it "HAS-A"?
-
-Then ask:
-
-* Strong ownership? → **Composition**
-* Weak ownership? → **Aggregation**
-* Just reference? → **Association**
-
-### ❓3. Only using temporarily?
-
-→ **Dependency**
-
-### ❓4. Interface involved?
-
-→ **Realization**
-
-## 🔥 10. Real LLD Example (VERY IMPORTANT)
-
-## Payment System
-
-```mermaid
-classDiagram
-    class PaymentService
-    class PaymentMethod {
-        <<interface>>
-    }
-    class CreditCard
-    class UPI
-
-    PaymentService --> PaymentMethod : depends on
-    CreditCard ..|> PaymentMethod : implements
-    UPI ..|> PaymentMethod : implements
-```
-
-## Code
-
-```java
-interface PaymentMethod {
-    void pay();
-}
-
-class CreditCard implements PaymentMethod {}
-class UPI implements PaymentMethod {}
-
-class PaymentService {
-    private PaymentMethod method; // association
-
-    PaymentService(PaymentMethod method) {
-        this.method = method;
-    }
-}
-```
-
-## 🎯 Interview Explanation
-
-> PaymentService depends on PaymentMethod via association, while concrete classes use realization. This enables polymorphism and decoupling.
-
-### 🚀 Final Insight (VERY IMPORTANT)
-
-👉 UML is not about drawing lines
-👉 It’s about **expressing design decisions**
-
-![[Drawing 2026-05-07 22.47.21.excalidraw]]
-
-tags: #SystemDesign
+> Source Playlist:  
+> [YouTube Playlist](https://www.youtube.com/watch?v=AK0hu0Zxua4&list=PLQEaRBV9gAFvzp6XhcNFpk1WdOcyVo9qT&utm_source=chatgpt.com)

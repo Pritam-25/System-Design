@@ -100,18 +100,18 @@ The Open/Closed Principle states:
 
 > Software entities should be **open for extension but closed for modification**
 
-## 🧠 Simple Interpretation
+### 🧠 Simple Interpretation
 
 * You should be able to **add new behavior**
 * Without **changing existing code**
 
-## 🔄 Key Idea
+### 🔄 Key Idea
 
 > Add new features by **adding new code**, not modifying old code
 
 ## ✅ 3. Applying OCP Step by Step
 
-## Step 1: Identify What Changes
+### Step 1: Identify What Changes
 
 In our example:
 
@@ -119,7 +119,7 @@ In our example:
 
 👉 This is the variation point
 
-## Step 2: Introduce Abstraction
+### Step 2: Introduce Abstraction
 
 ```java
 interface PaymentMethod {
@@ -127,7 +127,7 @@ interface PaymentMethod {
 }
 ```
 
-## Step 3: Create Concrete Implementations
+### Step 3: Create Concrete Implementations
 
 ```java
 class CreditCardPayment implements PaymentMethod {
