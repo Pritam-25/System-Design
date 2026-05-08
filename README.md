@@ -9,15 +9,15 @@
 
 <br>
 
-1. [Single Responsibility Principle (SRP)](<./SOLID%20Design%20Principle/Single%20Responsibility%20Principle%20(SRP)/README.md>)
+1. [Single Responsibility Principle (SRP)](<./SOLID Design Principle/Single Responsibility Principle (SRP)/README.md>)
 
-2. [Open Closed Principle (OCP)](<./SOLID%20Design%20Principle/Open%20Closed%20Principle%20(OCP)/README.md>)
+2. [Open Closed Principle (OCP)](<./SOLID Design Principle/Open Closed Principle (OCP)/README.md>)
 
-3. [Liskov Substitution Principle (LSP)](<./SOLID%20Design%20Principle/Liskov%20Substitution%20Principle%20(LSP)/README.md>)
+3. [Liskov Substitution Principle (LSP)](<./SOLID Design Principle/Liskov Substitution Principle (LSP)/README.md>)
 
-4. [Interface Segregation Principle (ISP)](<./SOLID%20Design%20Principle/Interface%20Segregation%20Principle%20(ISP)/README.md>)
+4. [Interface Segregation Principle (ISP)](<./SOLID Design Principle/Interface Segregation Principle (ISP)/README.md>)
 
-5. [Dependency Inversion Principle (DIP)](<./SOLID%20Design%20Principle/Dependency%20Inversion%20Principle%20(DIP)/README.md>)
+5. [Dependency Inversion Principle (DIP)](<./SOLID Design Principle/Dependency Inversion Principle (DIP)/README.md>)
 
 </details>
 

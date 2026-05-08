@@ -1,6 +1,4 @@
-Here is your **Single Responsibility Principle (SRP)** written in the same **professional, storytelling blog style** — clean, structured, and interview-ready.
-
-# 📦 Understanding the Single Responsibility Principle (SRP)
+# 📦Single Responsibility Principle (SRP)
 
 ## 🚀 The Real Problem Developers Face
 
