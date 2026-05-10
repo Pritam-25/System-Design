@@ -1,4 +1,11 @@
+---
+tags:
+  - SystemDesign
+  - "UML"
+Date: 2026-05-09
+---
 # 🌀 UML Relationships
+
 
 In UML Class Diagrams, **relationships describe how classes interact with each other**.
 
@@ -518,5 +525,3 @@ UML relationships are powerful tools to communicate:
 * abstraction boundaries
 * coupling strength
 * runtime interaction between objects
-
-tags: #SystemDesign
