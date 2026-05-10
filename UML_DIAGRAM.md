@@ -42,7 +42,7 @@ graph TD
 
 | Type                         | Meaning                  | Strength |
 | ---------------------------- | ------------------------ | -------- |
-| Association                  | General connection       | ⭐        |
+| Association                  | General connection       |          |
 | Aggregation                  | Weak "has-a"             | ⭐⭐       |
 | Composition                  | Strong "has-a"           | ⭐⭐⭐      |
 | Dependency                   | Uses temporarily         | ⭐        |

@@ -57,7 +57,7 @@ desktop.ini
 
 **/_*.java
 _*/
-
+**/_*.md
 .github/*
 
 .obsidian/*

@@ -2,13 +2,9 @@
 
 The Singleton Pattern ensures a class has **only one instance** and provides a **global point of access** to it.
 
----
+## 🌀 What is the Singleton Pattern?
 
-## 📚 What is the Singleton Pattern?
-
-The Singleton Design Pattern is a **creational pattern** that restricts the instantiation of a class to one single object. This is useful when exactly **one object is needed to coordinate actions** across a system.
-
----
+>The Singleton Design Pattern is a **creational pattern** that restricts the instantiation of a class to one single object. This is useful when exactly **one object is needed to coordinate actions** across a system.
 
 ## 🧠 Key Characteristics
 
@@ -16,13 +12,9 @@ The Singleton Design Pattern is a **creational pattern** that restricts the inst
 - **Global Access Point**: Provides a static method for accessing that instance.
 - **Thread-Safe**: In multithreaded environments, care must be taken to ensure only one instance is created.
 
----
-
-## 🛠️ How to Implement Singleton in Java?
+## 🧩 How to Implement Singleton in Java?
 
 There are **multiple ways** to implement a Singleton:
-
----
 
 ## 1️⃣ Eager Initialization
 
@@ -49,8 +41,6 @@ public class EagerSingleton {
 
 - Instance is created even if it’s never used (wastes memory/resources)
 
----
-
 ## 2️⃣ Lazy Initialization (Non-thread-safe ❌)
 
 ```java
@@ -71,8 +61,6 @@ public class LazySingleton {
 ### ❌ Not Thread-Safe:
 
 - Multiple threads could create multiple instances simultaneously.
-
----
 
 ## 3️⃣ Thread-Safe Singleton (Synchronized Method)
 
@@ -98,8 +86,6 @@ public class SynchronizedSingleton {
 ### ❌ Cons:
 
 - Slower due to method-level synchronization on every call
-
----
 
 ## 4️⃣ Double-Checked Locking Singleton ✅
 
@@ -130,8 +116,6 @@ public class DoubleCheckedSingleton {
 - Lazy initialization
 - Thread-safe
 
----
-
 ## 5️⃣ Singleton using Enum ✅🔥
 
 ```java
@@ -152,9 +136,7 @@ public enum EnumSingleton {
 
 ### ✅ Recommended by **Effective Java** (Joshua Bloch)
 
----
-
-## 📊 Comparison Table
+## ⚖️ Comparison Table
 
 | Approach               | Thread-Safe | Lazy   | Serialization Safe | Performance | Complexity |
 | ---------------------- | ----------- | ------ | ------------------ | ----------- | ---------- |
@@ -163,8 +145,6 @@ public enum EnumSingleton {
 | Synchronized Method    | ✅ Yes      | ✅ Yes | ❌ No              | ❌ Slow     | ✅ Simple  |
 | Double-Checked Locking | ✅ Yes      | ✅ Yes | ❌ No              | ✅ Fast     | ⚠️ Medium  |
 | Enum Singleton         | ✅ Yes      | ❌ No  | ✅ Yes             | ✅ Fast     | ✅ Easiest |
-
----
 
 ## 🧪 Real-World Use Cases
 
@@ -176,8 +156,6 @@ public enum EnumSingleton {
 | Thread Pool              | Shared across application                    |
 | Cache Manager            | Global memory cache instance                 |
 
----
-
 ## ⚠️ Pitfalls to Avoid
 
 | Mistake                            | Problem                                                |
@@ -187,16 +165,12 @@ public enum EnumSingleton {
 | Forgetting serialization logic     | `readResolve()` is needed if not using enum            |
 | Using too many singletons          | Becomes a disguised global variable (bad design smell) |
 
----
-
 ## ✅ Best Practices
 
 - Prefer **Enum Singleton** where possible
 - Use **Double-Checked Locking** only when performance matters
 - Avoid Singleton **for shared mutable state** in multi-threaded code unless it's safe
 - Consider **Dependency Injection** as a cleaner alternative
-
----
 
 ## 🙋🏻‍♂️ Author
 

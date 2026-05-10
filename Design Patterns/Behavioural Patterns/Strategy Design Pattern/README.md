@@ -199,7 +199,7 @@ This enables dynamic behavior switching. ([Wikipedia][2])
 
 ## 🔄 Runtime Flow (Sequence Diagram)
 
-```mermaid id="rr4v20"
+```mermaid
 ---
 config:
   theme: redux-dark-color
